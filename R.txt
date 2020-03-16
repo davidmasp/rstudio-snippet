@@ -1,0 +1,95 @@
+
+## copy paste in Rstudio
+## Rstudio > Tools > Global Options > Code > Edit snippet
+
+
+snippet ts
+	`r paste("#", date(), "------------------------------\n")`
+
+snippet rotate
+	theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+	
+snippet data
+	data_path = switch(Sys.info()[['sysname']],
+	     Windows= {"Y:/users/dmas/data/"},
+	     Linux  = {"~/data/"},
+	     Darwin = {"~/data/"})
+
+snippet platform
+	switch(Sys.info()[['sysname']],
+		Windows= {print("${1:win")},
+		Linux  = {print("${2:lin")},
+		Darwin = {print("${3:mac")})
+
+
+snippet purf
+	purrr::map(function(x){
+		 ${1:function}
+	})
+
+snippet yaml
+	#' ---
+	#' title: "${0}"
+	#' output:
+	#'   pdf_document:
+	#'   fig_width: 8
+	#' fig_caption: true
+	#' ---
+
+snippet newdocument
+	#!/usr/bin/env Rscript
+
+	# Name: ${1}
+	# Author: ${2}
+	# Description: ${3}
+	
+	# imports -----------------------------------------------------------------
+	
+	
+	
+	# params ------------------------------------------------------------------
+	
+	
+	
+	# data --------------------------------------------------------------------
+	
+	
+	
+	# script ------------------------------------------------------------------
+
+snippet results
+	today = Sys.Date()
+	current_dir = getwd()
+	results_path = fs::path(current_dir,"results","${0}",today)
+	tables_path = fs::path(current_dir,"tables","${0}",today)
+	figures_path = fs::path(current_dir,"figures","${0}",today)
+	fs::dir_create(results_path)
+	fs::dir_create(tables_path)
+	fs::dir_create(figures_path)
+	
+snippet progress
+	library(progress)
+	pb <- progress_bar\$new(total = length(${1}),
+	                       format = ":percent [:bar] eta: :eta | elapsed: :elapsed",
+	                       clear = FALSE,
+	                       width= cli::console_width())
+	# this goes inside the iteration
+	pb\$tick()
+
+
+snippet optparse
+	suppressPackageStartupMessages(require(optparse))
+	option_list = list(
+	  make_option(c("-i", "--input"),
+	              action="store",
+	              default=NA,
+	              type='character',
+	              help="data input [default %default]"),
+	  make_option(c("-v", "--verbose"),
+	              action="store_true",
+	              default=TRUE,
+	              help="verbosity [default %default]")
+	)
+	opt = parse_args(OptionParser(option_list=option_list))
+	
+	
